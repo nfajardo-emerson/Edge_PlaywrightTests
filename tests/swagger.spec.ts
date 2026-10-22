@@ -111,7 +111,7 @@ const endpoints: Endpoint[] = [
     swaggerOperation: "get /api/v2/graph",
     method: "GET",
     requestUrl: process.env.EDGE_API_BASE_URL + "/api/v2/graph",
-    operationId: "#operations-Graph-GetGraphRoot",
+    operationId: "#operations-Graph-GetGraphRoot_v2",
   },
   {
     swaggerOperation: "get /api/v2/graph/{id}",
@@ -119,7 +119,7 @@ const endpoints: Endpoint[] = [
     requestUrl:
       process.env.EDGE_API_BASE_URL +
       `/api/v2/graph/${process.env.DV_SYSTEM_ID}`,
-    operationId: "#operations-Graph-GetEntitiesV1",
+    operationId: "#operations-Graph-GetEntitiesV2",
     parameters: [
       {
         name: "id",
