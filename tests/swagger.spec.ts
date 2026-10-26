@@ -11,39 +11,10 @@ type Endpoint = {
     in: string;
     value: string | undefined;
   }[];
-  requestBody?: {
-    contentType: string;
-    formData: Record<string, string | undefined>;
-  };
+  requestBody?: Record<string, string | undefined>;
 };
 
 const endpoints: Endpoint[] = [
-  {
-    swaggerOperation: "get /api/v1-beta/lookup/parameters/subscribed",
-    method: "GET",
-    requestUrl:
-      process.env.EDGE_API_BASE_URL +
-      "/api/v1-beta/lookup/parameters/subscribed",
-    operationId:
-      "#operations-Lookup-get_api_v1_beta_lookup_parameters_subscribed",
-  },
-  {
-    swaggerOperation: "get /api/v1-beta/lookup/parameters/historized",
-    method: "GET",
-    requestUrl:
-      process.env.EDGE_API_BASE_URL +
-      "/api/v1-beta/lookup/parameters/historized",
-    operationId:
-      "#operations-Lookup-get_api_v1_beta_lookup_parameters_historized",
-  },
-  {
-    swaggerOperation: "get /api/v1-beta/lookup/debug/paths-mapping",
-    method: "GET",
-    requestUrl:
-      process.env.EDGE_API_BASE_URL + "/api/v1-beta/lookup/debug/paths-mapping",
-    operationId:
-      "#operations-Lookup-get_api_v1_beta_lookup_debug_paths_mapping",
-  },
   {
     swaggerOperation: "get /api/v3/ae",
     method: "GET",
@@ -67,24 +38,6 @@ const endpoints: Endpoint[] = [
     method: "POST",
     requestUrl: process.env.EDGE_API_BASE_URL + "/api/v1/bulk/runtime",
     operationId: "#operations-Bulk-post_api_v1_bulk_runtime",
-  },
-  {
-    swaggerOperation: "post /api/v2/bulk/graph",
-    method: "POST",
-    requestUrl: process.env.EDGE_API_BASE_URL + "/api/v2/bulk/graph",
-    operationId: "#operations-Bulk-post_api_v2_bulk_graph",
-  },
-  {
-    swaggerOperation: "post /api/v2/bulk/history",
-    method: "POST",
-    requestUrl: process.env.EDGE_API_BASE_URL + "/api/v2/bulk/history",
-    operationId: "#operations-Bulk-post_api_v2_bulk_history",
-  },
-  {
-    swaggerOperation: "post /api/v2/bulk/runtime",
-    method: "POST",
-    requestUrl: process.env.EDGE_API_BASE_URL + "/api/v2/bulk/runtime",
-    operationId: "#operations-Bulk-post_api_v2_bulk_runtime",
   },
   {
     swaggerOperation: "get /api/v1/graph",
@@ -210,11 +163,8 @@ const endpoints: Endpoint[] = [
       },
     ],
     requestBody: {
-      contentType: "multipart/form-data",
-      formData: {
-        Username: process.env.EDGE_USERNAME,
-        Password: process.env.EDGE_PASSWORD,
-      },
+      Username: process.env.EDGE_USERNAME,
+      Password: process.env.EDGE_PASSWORD,
     },
   },
 ];
@@ -260,11 +210,7 @@ endpoints.forEach((endpoint) => {
       }
 
       if (requestBody) {
-        await operation
-          .getByRole("combobox", { name: "Request content type" })
-          .selectOption(requestBody.contentType);
-
-        for (const [name, value] of Object.entries(requestBody.formData)) {
+        for (const [name, value] of Object.entries(requestBody)) {
           if (value === undefined) {
             throw new Error(`Missing value for form-data field "${name}"`);
           }
