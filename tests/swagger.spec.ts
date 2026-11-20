@@ -28,6 +28,12 @@ const endpoints: Endpoint[] = [
     operationId: "#operations-BatchEvent-get_api_v1_batchevent",
   },
   {
+    swaggerOperation: "get /api/v1/batchlist",
+    method: "GET",
+    requestUrl: process.env.EDGE_API_BASE_URL + "/api/v1/batchlist",
+    operationId: "#operations-BatchList-get_api_v1_batchlist",
+  },
+  {
     swaggerOperation: "post /api/v1/bulk/graph",
     method: "POST",
     requestUrl: process.env.EDGE_API_BASE_URL + "/api/v1/bulk/graph",
